@@ -36,4 +36,4 @@ pip-log.txt
 testem.*.*.*.json
 
 
-/public/dist/
+reversi-data.json

@@ -23,7 +23,8 @@
     "reversi": "./bin/reversi"
   },
   "dependencies": {
-    "minimist": "1.2.0"
+    "minimist": "1.2.0",
+    "minimist-subcommand": "1.0.0"
   },
   "devDependencies": {
     "mocha": "2.3.4"

@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+var parseArgs = require('minimist');
+var parseCommands = require('minimist-subcommand');
+
+var reversi = require('../index');
+
+
+var commandDefinition = {
+  default: 'next',
+  commands: {
+    init: null,
+    next: null
+  }
+};
+var parsedCommandsAndArgv = parseCommands(commandDefinition, process.argv.slice(2));
+var subCommandName = parsedCommandsAndArgv.commands[0];
+
+if (subCommandName === 'init') {
+  reversi.executeInitCommand(function(err) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+      return;
+    }
+    process.exit(0);
+  });
+}

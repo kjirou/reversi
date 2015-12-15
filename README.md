@@ -1,1 +1,1 @@
-# node-reversi
+# reversi

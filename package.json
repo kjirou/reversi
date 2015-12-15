@@ -1,5 +1,5 @@
 {
-  "name": "node-reversi",
+  "name": "reversi",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kjirou/node-reversi.git"
+    "url": "git+https://github.com/kjirou/reversi.git"
   },
   "keywords": [
     "game"
@@ -16,13 +16,13 @@
   "author": "kjirou",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kjirou/node-reversi/issues"
+    "url": "https://github.com/kjirou/reversi/issues"
   },
-  "homepage": "https://github.com/kjirou/node-reversi#readme",
+  "homepage": "https://github.com/kjirou/reversi#readme",
   "bin": {
-    "nreversi": "./bin/nreversi"
+    "nreversi": "./bin/reversi"
   },
   "dependencies": {
-    "minimist": "^1.2.0"
+    "minimist": "1.2.0"
   }
 }

@@ -55,7 +55,10 @@ Board.prototype.tryReverseToDirection = function(rowIndex, colIndex, fromKomaTyp
     if (
       !nextSquare &&
       nextSquare.komaType !== null &&
-      nextSquare.komaType !== fromKomaType
+      (
+        nextSquare.komaType !== fromKomaType ||
+        nextSquare.komaType === fromKomaType && reversibleSquares.length > 0
+      )
     ) {
       reversibleSquares.push([rowIndex, colIndex]);
       nextStep(rowIndex + direction[0], colIndex + direction[1], fromKomaType, direction);

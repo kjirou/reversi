@@ -26,7 +26,7 @@ Board.prototype.putKoma = function(rowIndex, colIndex, komaType) {
   this._squares[rowIndex][colIndex].komaType = komaType;
 };
 
-Board.prototype.tryReverseOthers = function(rowIndex, colIndex, komaType) {
+Board.prototype.tryReverse = function(rowIndex, colIndex, fromKomaType) {
   var that = this;
   var directions = [
     [1, 0],
@@ -41,7 +41,7 @@ Board.prototype.tryReverseOthers = function(rowIndex, colIndex, komaType) {
   var reversibleSquares = [];
   directions.forEach(function(direction) {
     reversibleSquares = reversibleSquares.concat(
-      that.tryReverseToDirection(rowIndex, colIndex, komaType, direction)
+      that.tryReverseToDirection(rowIndex, colIndex, fromKomaType, direction)
     );
   });
   return reversibleSquares;
@@ -49,23 +49,26 @@ Board.prototype.tryReverseOthers = function(rowIndex, colIndex, komaType) {
 
 Board.prototype.tryReverseToDirection = function(rowIndex, colIndex, fromKomaType, direction) {
   var that = this;
+  var isSuccess = false;
   var reversibleSquares = [];
+
   function nextStep(rowIndex, colIndex, fromKomaType, direction) {
     var nextSquare = that._squares[rowIndex][colIndex];
     if (
-      !nextSquare &&
-      nextSquare.komaType !== null &&
-      (
-        nextSquare.komaType !== fromKomaType ||
-        nextSquare.komaType === fromKomaType && reversibleSquares.length > 0
-      )
+      nextSquare &&
+      nextSquare.komaType !== null
     ) {
-      reversibleSquares.push([rowIndex, colIndex]);
-      nextStep(rowIndex + direction[0], colIndex + direction[1], fromKomaType, direction);
+      if (nextSquare.komaType !== fromKomaType) {
+        reversibleSquares.push([rowIndex, colIndex]);
+        nextStep(rowIndex + direction[0], colIndex + direction[1], fromKomaType, direction);
+      } else if (nextSquare.komaType === fromKomaType && reversibleSquares.length > 0) {
+        isSuccess = true;
+      }
     }
   };
-  nextStep(rowIndex, colIndex, fromKomaType, direction);
-  return reversibleSquares;
+  nextStep(rowIndex + direction[0], colIndex + direction[1], fromKomaType, direction);
+
+  return isSuccess ? reversibleSquares : [];
 };
 
 Board.prototype.canReverseOthers = function(rowIndex, colIndex, komaType) {
@@ -88,7 +91,7 @@ Board.prototype.toText = function() {
 
 var board = new Board();
 
-console.log(board.toText());
+//console.log(board.toText());
 
-var result = board.tryReverseOthers(2, 3, 'black');
+var result = board.tryReverse(2, 3, 'black');
 console.log(result);

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/kjirou/reversi#readme",
   "bin": {
-    "nreversi": "./bin/reversi"
+    "reversi": "./bin/reversi"
   },
   "dependencies": {
     "minimist": "1.2.0"

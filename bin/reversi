@@ -1,28 +1,45 @@
 #!/usr/bin/env node
 
-var parseArgs = require('minimist');
-var parseCommands = require('minimist-subcommand');
+//var parseArgs = require('minimist');
+//var parseCommands = require('minimist-subcommand');
+//
+//var reversi = require('../index');
+//
+//
+//var commandDefinition = {
+//  default: 'next',
+//  commands: {
+//    init: null,
+//    next: null
+//  }
+//};
+//var parsedCommandsAndArgv = parseCommands(commandDefinition, process.argv.slice(2));
+//var subCommandName = parsedCommandsAndArgv.commands[0];
+//
+//if (subCommandName === 'init') {
+//  reversi.executeInitCommand(function(err) {
+//    if (err) {
+//      console.error(err);
+//      process.exit(1);
+//      return;
+//    }
+//    process.exit(0);
+//  });
+//}
 
-var reversi = require('../index');
+var keypress = require('keypress');
 
 
-var commandDefinition = {
-  default: 'next',
-  commands: {
-    init: null,
-    next: null
+keypress(process.stdin);
+
+process.stdin.on('keypress', function (ch, key) {
+  console.log('got "keypress"', ch, key);
+  if (key && key.ctrl && key.name == 'c') {
+    process.stdin.pause();
   }
-};
-var parsedCommandsAndArgv = parseCommands(commandDefinition, process.argv.slice(2));
-var subCommandName = parsedCommandsAndArgv.commands[0];
+});
 
-if (subCommandName === 'init') {
-  reversi.executeInitCommand(function(err) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-      return;
-    }
-    process.exit(0);
-  });
-}
+
+process.stdin.setRawMode(true);
+process.stdin.resume();
+process.stdout.write(':');

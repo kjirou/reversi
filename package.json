@@ -23,6 +23,7 @@
     "reversi": "./bin/reversi"
   },
   "dependencies": {
+    "keypress": "0.2.1",
     "minimist": "1.2.0",
     "minimist-subcommand": "1.0.0"
   },

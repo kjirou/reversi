@@ -33,7 +33,7 @@ describe('lib/board', function() {
     ].join('\n'));
   });
 
-  it('_tryToReverseTowardOneDirection, tryToReverse', function() {
+  it('_tryToReverseTowardOneDirection, tryToReverse, putPieceToReverse', function() {
     var board = new Board();
     board.initializeGame();
     board._putPiece(3, 2, Board.PIECE_TYPES.WHITE);
@@ -74,5 +74,28 @@ describe('lib/board', function() {
       [4, 3],
       [4, 1]
     ]);
+
+    board.putPieceToReverse(3, 1, Board.PIECE_TYPES.BLACK);
+    assert.strictEqual(board.toText(), [
+      '--------',
+      '--------',
+      '--------',
+      '-xxxx---',
+      'ox-xo---',
+      '--------',
+      '--------',
+      '--------'
+    ].join('\n'));
+    board.putPieceToReverse(4, 2, Board.PIECE_TYPES.WHITE);
+    assert.strictEqual(board.toText(), [
+      '--------',
+      '--------',
+      '--------',
+      '-xxxx---',
+      'ooooo---',
+      '--------',
+      '--------',
+      '--------'
+    ].join('\n'));
   });
 });

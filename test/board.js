@@ -148,17 +148,6 @@ describe('lib/board', () => {
     });
   });
 
-  it('isEnded', () => {
-    let board;
-
-    board = new Board();
-    board.prepareGame();
-    assert.strictEqual(board.isEnded(), false);
-
-    board = new Board();
-    assert.strictEqual(board.isEnded(), true);
-  });
-
   it('getPlacableSquares', () => {
     const board = new Board();
     assert.strictEqual(board.getPlacableSquares(consts.PIECE_TYPES.BLACK).length, 0)

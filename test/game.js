@@ -42,28 +42,34 @@ describe('lib/game', () => {
     game._board._putPiece(3, 2, PIECE_TYPES.BLACK);
     game._board._putPiece(3, 3, PIECE_TYPES.WHITE);
     game._board._putPiece(3, 5, PIECE_TYPES.WHITE);
-    assert.strictEqual(game._board.toText(), [
-      '--------',
-      '--------',
-      '--------',
-      '-oxo-o--',
-      '--------',
-      '--------',
-      '--------',
-      '--------',
+    assert.strictEqual(game.toText(), [
+      ' 01234567',
+      '0--------',
+      '1--------',
+      '2--------',
+      '3-oxo-o--',
+      '4--------',
+      '5--------',
+      '6--------',
+      '7--------',
+      'x: 1, o: 3',
+      '> Place a "x" piece'
     ].join('\n'));
 
     let report;
     report = game.proceed(0, 0);
-    assert.strictEqual(game._board.toText(), [
-      '--------',
-      '--------',
-      '--------',
-      '-oxo-o--',
-      '--------',
-      '--------',
-      '--------',
-      '--------',
+    assert.strictEqual(game.toText(), [
+      ' 01234567',
+      '0--------',
+      '1--------',
+      '2--------',
+      '3-oxo-o--',
+      '4--------',
+      '5--------',
+      '6--------',
+      '7--------',
+      'x: 1, o: 3',
+      '> Place a "x" piece'
     ].join('\n'));
     assert.deepEqual(report, {
       pieceType: PIECE_TYPES.BLACK,
@@ -75,15 +81,18 @@ describe('lib/game', () => {
     });
 
     report = game.proceed(3, 4);
-    assert.strictEqual(game._board.toText(), [
-      '--------',
-      '--------',
-      '--------',
-      '-oxxxo--',
-      '--------',
-      '--------',
-      '--------',
-      '--------',
+    assert.strictEqual(game.toText(), [
+      ' 01234567',
+      '0--------',
+      '1--------',
+      '2--------',
+      '3-oxxxo--',
+      '4--------',
+      '5--------',
+      '6--------',
+      '7--------',
+      'x: 3, o: 2',
+      '> Place a "x" piece continuously'
     ].join('\n'));
     assert.deepEqual(report, {
       pieceType: PIECE_TYPES.BLACK,
@@ -95,15 +104,18 @@ describe('lib/game', () => {
     });
 
     report = game.proceed(3, 6);
-    assert.strictEqual(game._board.toText(), [
-      '--------',
-      '--------',
-      '--------',
-      '-oxxxxx-',
-      '--------',
-      '--------',
-      '--------',
-      '--------',
+    assert.strictEqual(game.toText(), [
+      ' 01234567',
+      '0--------',
+      '1--------',
+      '2--------',
+      '3-oxxxxx-',
+      '4--------',
+      '5--------',
+      '6--------',
+      '7--------',
+      'x: 5, o: 1',
+      '> Place a "o" piece'
     ].join('\n'));
     assert.deepEqual(report, {
       pieceType: PIECE_TYPES.BLACK,

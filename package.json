@@ -1,6 +1,6 @@
 {
   "name": "reversi",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Core logics for Reversi",
   "main": "index.js",
   "scripts": {

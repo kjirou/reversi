@@ -50,7 +50,7 @@ console.log(game.toText());
 //
 // Get status
 //
-game.isEnded; // -> false
+game.isEnded;          // -> false
 game.getHighScorer();  // -> PIECE_TYPES.BLACK
 
 
@@ -58,6 +58,7 @@ game.getHighScorer();  // -> PIECE_TYPES.BLACK
 // Board object
 //
 var board = game.board;
+var squares = board.squares;  // -> squares[rowIndex][colIndex]
 
 
 //
@@ -67,3 +68,9 @@ board.isPlacableSquare(0, 0, PIECE_TYPES.WHITE);  // -> false
 board.isPlacableSquare(4, 5, PIECE_TYPES.WHITE);  // -> true
 board.getPlacableSquares(PIECE_TYPES.WHITE);      // -> 3 squares
 board.hasPlacableSquare(PIECE_TYPES.WHITE);       // -> true
+
+
+//
+// Get score detail
+//
+board.countByPieceType();  // -> { [PIECE_TYPES.BLACK]: 4, [PIECE_TYPES.WHITE]: 1, [PIECE_TYPES.BLANK]: 59 }

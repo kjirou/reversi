@@ -16,10 +16,15 @@ describe('lib/board', () => {
     assert.strictEqual(typeof squares[0][0], 'object');
   })
 
-  it('new', () => {
+  it('constructor', () => {
     const board = new Board();
     assert.strictEqual(board._squares.length, 8);
     assert.strictEqual(board._squares[0].length, 8);
+  });
+
+  it('accessors', () => {
+    const board = new Board();
+    assert(Array.isArray(board.squares));
   });
 
   it('toText', () => {

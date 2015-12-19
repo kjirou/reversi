@@ -2,6 +2,7 @@
 
 const assert = require('assert');
 
+const consts = require('../lib/consts');
 const Board = require('../lib/board').Board;
 
 
@@ -38,9 +39,9 @@ describe('lib/board', () => {
   it('_tryToReverseTowardOneDirection, tryToReverse, putPieceToReverse', () => {
     const board = new Board();
     board.prepareGame();
-    board._putPiece(3, 2, Board.PIECE_TYPES.WHITE);
-    board._putPiece(4, 0, Board.PIECE_TYPES.WHITE);
-    board._putPiece(4, 1, Board.PIECE_TYPES.BLACK);
+    board._putPiece(3, 2, consts.PIECE_TYPES.WHITE);
+    board._putPiece(4, 0, consts.PIECE_TYPES.WHITE);
+    board._putPiece(4, 1, consts.PIECE_TYPES.BLACK);
     assert.strictEqual(board.toText(), [
       '--------',
       '--------',
@@ -52,32 +53,32 @@ describe('lib/board', () => {
       '--------'
     ].join('\n'));
 
-    assert.deepEqual(board._tryToReverseTowardOneDirection(3, 1, Board.PIECE_TYPES.BLACK, [0, 1]), [
+    assert.deepEqual(board._tryToReverseTowardOneDirection(3, 1, consts.PIECE_TYPES.BLACK, [0, 1]), [
       [3, 2],
       [3, 3]
     ]);
-    assert.deepEqual(board._tryToReverseTowardOneDirection(3, 1, Board.PIECE_TYPES.WHITE, [0, 1]), []);
-    assert.deepEqual(board._tryToReverseTowardOneDirection(3, 1, Board.PIECE_TYPES.BLACK, [1, 1]), []);
+    assert.deepEqual(board._tryToReverseTowardOneDirection(3, 1, consts.PIECE_TYPES.WHITE, [0, 1]), []);
+    assert.deepEqual(board._tryToReverseTowardOneDirection(3, 1, consts.PIECE_TYPES.BLACK, [1, 1]), []);
 
-    assert.deepEqual(board._tryToReverseTowardOneDirection(4, 2, Board.PIECE_TYPES.WHITE, [0, 1]), [
+    assert.deepEqual(board._tryToReverseTowardOneDirection(4, 2, consts.PIECE_TYPES.WHITE, [0, 1]), [
       [4, 3]
     ]);
-    assert.deepEqual(board._tryToReverseTowardOneDirection(4, 2, Board.PIECE_TYPES.WHITE, [0, -1]), [
+    assert.deepEqual(board._tryToReverseTowardOneDirection(4, 2, consts.PIECE_TYPES.WHITE, [0, -1]), [
       [4, 1]
     ]);
-    assert.deepEqual(board._tryToReverseTowardOneDirection(4, 2, Board.PIECE_TYPES.WHITE, [1, 0]), []);
-    assert.deepEqual(board._tryToReverseTowardOneDirection(4, 2, Board.PIECE_TYPES.BLACK, [0, 1]), []);
+    assert.deepEqual(board._tryToReverseTowardOneDirection(4, 2, consts.PIECE_TYPES.WHITE, [1, 0]), []);
+    assert.deepEqual(board._tryToReverseTowardOneDirection(4, 2, consts.PIECE_TYPES.BLACK, [0, 1]), []);
 
-    assert.deepEqual(board.tryToReverse(3, 1, Board.PIECE_TYPES.BLACK), [
+    assert.deepEqual(board.tryToReverse(3, 1, consts.PIECE_TYPES.BLACK), [
       [3, 2],
       [3, 3]
     ]);
-    assert.deepEqual(board.tryToReverse(4, 2, Board.PIECE_TYPES.WHITE), [
+    assert.deepEqual(board.tryToReverse(4, 2, consts.PIECE_TYPES.WHITE), [
       [4, 3],
       [4, 1]
     ]);
 
-    board.putPieceToReverse(3, 1, Board.PIECE_TYPES.BLACK);
+    board.putPieceToReverse(3, 1, consts.PIECE_TYPES.BLACK);
     assert.strictEqual(board.toText(), [
       '--------',
       '--------',
@@ -88,7 +89,7 @@ describe('lib/board', () => {
       '--------',
       '--------'
     ].join('\n'));
-    board.putPieceToReverse(4, 2, Board.PIECE_TYPES.WHITE);
+    board.putPieceToReverse(4, 2, consts.PIECE_TYPES.WHITE);
     assert.strictEqual(board.toText(), [
       '--------',
       '--------',

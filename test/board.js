@@ -59,6 +59,7 @@ describe('lib/board', () => {
     ]);
     assert.deepEqual(board._tryToReverseTowardOneDirection(3, 1, consts.PIECE_TYPES.WHITE, [0, 1]), []);
     assert.deepEqual(board._tryToReverseTowardOneDirection(3, 1, consts.PIECE_TYPES.BLACK, [1, 1]), []);
+    assert.deepEqual(board._tryToReverseTowardOneDirection(0, 0, consts.PIECE_TYPES.BLACK, [-1, -1]), []);
 
     assert.deepEqual(board._tryToReverseTowardOneDirection(4, 2, consts.PIECE_TYPES.WHITE, [0, 1]), [
       [4, 3]
@@ -100,5 +101,33 @@ describe('lib/board', () => {
       '--------',
       '--------'
     ].join('\n'));
+  });
+
+  it('countPieceTypes', () => {
+    const board = new Board();
+    board.prepareGame();
+    assert.deepEqual(board.countPieceTypes(), {
+      BLACK: 2,
+      BLANK: 60,
+      WHITE: 2,
+    });
+
+    board.putPieceToReverse(3, 2, consts.PIECE_TYPES.BLACK);
+    assert.deepEqual(board.countPieceTypes(), {
+      BLACK: 4,
+      BLANK: 59,
+      WHITE: 1,
+    });
+  });
+
+  it('isEnded', () => {
+    let board;
+
+    board = new Board();
+    board.prepareGame();
+    assert.strictEqual(board.isEnded(), false);
+
+    board = new Board();
+    assert.strictEqual(board.isEnded(), true);
   });
 });

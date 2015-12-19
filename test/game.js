@@ -23,8 +23,8 @@ describe('lib/game', () => {
       '5--------',
       '6--------',
       '7--------',
-      'Next: x',
-      'Turn: 0',
+      'x: 2, o: 2',
+      '> Put a "x" piece'
     ].join('\n'));
   });
 
@@ -42,8 +42,8 @@ describe('lib/game', () => {
       '5--------',
       '6--------',
       '7--------',
-      'Next: o',
-      'Turn: 1',
+      'x: 4, o: 1',
+      '> Put a "o" piece'
     ].join('\n'));
 
     assert.strictEqual(game.proceed(2, 4).isSuccess, true);
@@ -57,8 +57,8 @@ describe('lib/game', () => {
       '5--------',
       '6--------',
       '7--------',
-      'Next: x',
-      'Turn: 2',
+      'x: 3, o: 3',
+      '> Put a "x" piece'
     ].join('\n'));
 
     assert.strictEqual(game.proceed(5, 5).isSuccess, true);
@@ -72,8 +72,23 @@ describe('lib/game', () => {
       '5-----x--',
       '6--------',
       '7--------',
-      'Next: o',
-      'Turn: 3',
+      'x: 5, o: 2',
+      '> Put a "o" piece'
+    ].join('\n'));
+
+    assert.strictEqual(game.proceed(1, 4).isSuccess, false);
+    assert.strictEqual(game.toText(), [
+      ' 01234567',
+      '0--------',
+      '1--------',
+      '2----o---',
+      '3--xxo---',
+      '4---xx---',
+      '5-----x--',
+      '6--------',
+      '7--------',
+      'x: 5, o: 2',
+      '> Put a "o" piece'
     ].join('\n'));
   });
 });

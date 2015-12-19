@@ -1,25 +1,27 @@
-var assert = require('assert');
+'use strict';
 
-var Board = require('../lib/board');
+const assert = require('assert');
+
+const Board = require('../lib/board').Board;
 
 
-describe('lib/board', function() {
+describe('lib/board', () => {
 
-  it('_createSquares', function() {
-    var squares = Board.prototype._createSquares(2, 3);
+  it('_createSquares', () => {
+    const squares = Board.prototype._createSquares(2, 3);
     assert.strictEqual(squares.length, 2);
     assert.strictEqual(squares[0].length, 3);
     assert.strictEqual(typeof squares[0][0], 'object');
   })
 
-  it('new', function() {
-    var board = new Board();
+  it('new', () => {
+    const board = new Board();
     assert.strictEqual(board._squares.length, 8);
     assert.strictEqual(board._squares[0].length, 8);
   });
 
-  it('prepareGame', function() {
-    var board = new Board();
+  it('prepareGame', () => {
+    const board = new Board();
     board.prepareGame();
     assert.strictEqual(board.toText(), [
       '--------',
@@ -33,8 +35,8 @@ describe('lib/board', function() {
     ].join('\n'));
   });
 
-  it('_tryToReverseTowardOneDirection, tryToReverse, putPieceToReverse', function() {
-    var board = new Board();
+  it('_tryToReverseTowardOneDirection, tryToReverse, putPieceToReverse', () => {
+    const board = new Board();
     board.prepareGame();
     board._putPiece(3, 2, Board.PIECE_TYPES.WHITE);
     board._putPiece(4, 0, Board.PIECE_TYPES.WHITE);

@@ -1,11 +1,10 @@
-var Board = require('./lib/board');
-var storage = require('./lib/storage');
+'use strict';
 
+const consts = require('./lib/consts');
+const game = require('./lib/game');
 
-function executeInitCommand(callback) {
-  storage.saveInitialData(callback);
-}
 
 module.exports = {
-  executeInitCommand: executeInitCommand
+  PIECE_TYPES: consts.PIECE_TYPES,
+  Game: game.Game,
 };

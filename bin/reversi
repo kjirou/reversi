@@ -1,45 +1,42 @@
 #!/usr/bin/env node
 
-//var parseArgs = require('minimist');
-//var parseCommands = require('minimist-subcommand');
-//
-//var reversi = require('../index');
-//
-//
-//var commandDefinition = {
-//  default: 'next',
-//  commands: {
-//    init: null,
-//    next: null
-//  }
-//};
-//var parsedCommandsAndArgv = parseCommands(commandDefinition, process.argv.slice(2));
-//var subCommandName = parsedCommandsAndArgv.commands[0];
-//
-//if (subCommandName === 'init') {
-//  reversi.executeInitCommand(function(err) {
-//    if (err) {
-//      console.error(err);
-//      process.exit(1);
-//      return;
-//    }
-//    process.exit(0);
-//  });
-//}
+'use strict';
 
-var keypress = require('keypress');
+const keypress = require('keypress');
+
+const reversi = require('../index');
+const Game = reversi.Game;
 
 
 keypress(process.stdin);
+process.stdin.setRawMode(true);
 
-process.stdin.on('keypress', function (ch, key) {
-  console.log('got "keypress"', ch, key);
-  if (key && key.ctrl && key.name == 'c') {
+const game = new Game();
+let inputBuffer = '';
+const rerender = () => {
+  console.log('\n' + game.toText());
+  process.stdout.write('(x,y):');
+}
+
+process.stdin.on('keypress', (ch, key) => {
+  if (key && key.ctrl && (key.name === 'c' || key.name === 'd')) {
     process.stdin.pause();
+    process.exit();
+  }
+
+  if (/^[\d ,]$/.test(ch)) {
+    inputBuffer += ch;
+    process.stdout.write(ch);
+  } else if (ch === '\n' || ch === '\r') {
+    const matched = /^(\d)[ ,]+(\d)$/.exec(inputBuffer);
+    if (matched !== null) {
+      game.proceed(~~(matched[2]), ~~(matched[1]));
+    }
+    inputBuffer = '';
+    rerender();
   }
 });
 
-
-process.stdin.setRawMode(true);
 process.stdin.resume();
-process.stdout.write(':');
+
+rerender();

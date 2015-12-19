@@ -1,76 +1,8 @@
-# reversi
+#!/usr/bin/env node
 
-[![npm version](https://badge.fury.io/js/reversi.svg)](http://badge.fury.io/js/reversi)
-[![Build Status](https://travis-ci.org/kjirou/reversi.svg?branch=master)](https://travis-ci.org/kjirou/reversi)
+var assert = require('assert');
 
-Core logics for [Reversi](https://en.wikipedia.org/wiki/Reversi)
-
-
-## Playtest
-
-### Installation
-
-```bash
-npm install -g reversi
-```
-
-### Run by CUI
-
-You can start the Reversi game by `reversi` command:
-
-```bash
-$reversi
-
- 01234567
-0--------
-1--------
-2--------
-3---ox---
-4---xo---
-5--------
-6--------
-7--------
-x: 2, o: 2
-> Place a "x" piece
-(x,y):
-```
-
-If you input like this:
-
-```
-(x,y):3,2
-```
-
-It becomes such a result:
-
-```
- 01234567
-0--------
-1--------
-2---x----
-3---xx---
-4---xo---
-5--------
-6--------
-7--------
-x: 4, o: 1
-> Place a "o" piece
-(x,y):
-```
-
-
-## Use in Node.js
-
-### Installation
-
-```bash
-npm install --save reversi
-```
-
-### Example
-
-```js
-var reversi = require('reversi');
+var reversi = require('../index');
 var Game = reversi.Game;
 var PIECE_TYPES = reversi.PIECE_TYPES;
 
@@ -135,4 +67,3 @@ board.isPlacableSquare(0, 0, PIECE_TYPES.WHITE);  // -> false
 board.isPlacableSquare(4, 5, PIECE_TYPES.WHITE);  // -> true
 board.getPlacableSquares(PIECE_TYPES.WHITE);      // -> 3 squares
 board.hasPlacableSquare(PIECE_TYPES.WHITE);       // -> true
-```

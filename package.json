@@ -1,7 +1,7 @@
 {
   "name": "reversi",
   "version": "0.0.0",
-  "description": "",
+  "description": "Core logics for Reversi",
   "main": "index.js",
   "scripts": {
     "test": "mocha"

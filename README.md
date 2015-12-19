@@ -58,6 +58,8 @@ x: 4, o: 1
 (x,y):
 ```
 
+![](https://raw.githubusercontent.com/kjirou/reversi/master/doc/demo.gif)
+
 
 ## Use in Node.js
 
@@ -98,7 +100,7 @@ console.log(game.toText());
 //
 // Place a piece by (rowIndex, colIndex)
 //
-game.proceed(2, 3);
+var report = game.proceed(2, 3);
 console.log(game.toText());
 //
 //  01234567
@@ -112,6 +114,20 @@ console.log(game.toText());
 // 7--------
 // x: 4, o: 1
 // > Place a "o" piece
+//
+
+
+//
+// Get more information at "proceed" execution
+//
+console.log(report);
+//
+// { pieceType: 'BLACK',
+//   rivalPieceType: 'WHITE',
+//   rowIndex: 2,
+//   colIndex: 3,
+//   isSuccess: true,
+//   isNextActorPassed: false }
 //
 
 

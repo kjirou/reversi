@@ -11,7 +11,9 @@
     "url": "git+https://github.com/kjirou/reversi.git"
   },
   "keywords": [
-    "game"
+    "algorithm",
+    "game",
+    "reversi"
   ],
   "author": "kjirou",
   "license": "MIT",

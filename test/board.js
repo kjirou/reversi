@@ -3,6 +3,7 @@
 const assert = require('assert');
 
 const consts = require('../lib/consts');
+const PIECE_TYPES = consts.PIECE_TYPES;
 const Board = require('../lib/board').Board;
 
 
@@ -21,6 +22,33 @@ describe('lib/board', () => {
     assert.strictEqual(board._squares[0].length, 8);
   });
 
+  it('toText', () => {
+    const board = new Board();
+    board._putPiece(0, 0, PIECE_TYPES.BLACK);
+    board._putPiece(0, 1, PIECE_TYPES.WHITE);
+    assert.strictEqual(board.toText(), [
+      'xo------',
+      '--------',
+      '--------',
+      '--------',
+      '--------',
+      '--------',
+      '--------',
+      '--------'
+    ].join('\n'));
+    assert.strictEqual(board.toText({ withRuler: true }), [
+      ' 01234567',
+      '0xo------',
+      '1--------',
+      '2--------',
+      '3--------',
+      '4--------',
+      '5--------',
+      '6--------',
+      '7--------'
+    ].join('\n'));
+  });
+
   it('prepareGame', () => {
     const board = new Board();
     board.prepareGame();
@@ -36,7 +64,7 @@ describe('lib/board', () => {
     ].join('\n'));
   });
 
-  it('_tryToReverseTowardOneDirection, tryToReverse, putPieceToReverse', () => {
+  it('_tryToReverseTowardOneDirection, tryToReverse, placePiece', () => {
     const board = new Board();
     board.prepareGame();
     board._putPiece(3, 2, consts.PIECE_TYPES.WHITE);
@@ -79,7 +107,7 @@ describe('lib/board', () => {
       [4, 1]
     ]);
 
-    board.putPieceToReverse(3, 1, consts.PIECE_TYPES.BLACK);
+    board.placePiece(3, 1, consts.PIECE_TYPES.BLACK);
     assert.strictEqual(board.toText(), [
       '--------',
       '--------',
@@ -90,7 +118,7 @@ describe('lib/board', () => {
       '--------',
       '--------'
     ].join('\n'));
-    board.putPieceToReverse(4, 2, consts.PIECE_TYPES.WHITE);
+    board.placePiece(4, 2, consts.PIECE_TYPES.WHITE);
     assert.strictEqual(board.toText(), [
       '--------',
       '--------',
@@ -103,17 +131,17 @@ describe('lib/board', () => {
     ].join('\n'));
   });
 
-  it('countPieceTypes', () => {
+  it('countByPieceType', () => {
     const board = new Board();
     board.prepareGame();
-    assert.deepEqual(board.countPieceTypes(), {
+    assert.deepEqual(board.countByPieceType(), {
       BLACK: 2,
       BLANK: 60,
       WHITE: 2,
     });
 
-    board.putPieceToReverse(3, 2, consts.PIECE_TYPES.BLACK);
-    assert.deepEqual(board.countPieceTypes(), {
+    board.placePiece(3, 2, consts.PIECE_TYPES.BLACK);
+    assert.deepEqual(board.countByPieceType(), {
       BLACK: 4,
       BLANK: 59,
       WHITE: 1,
@@ -129,5 +157,15 @@ describe('lib/board', () => {
 
     board = new Board();
     assert.strictEqual(board.isEnded(), true);
+  });
+
+  it('getPlacableSquares', () => {
+    const board = new Board();
+    assert.strictEqual(board.getPlacableSquares(consts.PIECE_TYPES.BLACK).length, 0)
+    assert.strictEqual(board.getPlacableSquares(consts.PIECE_TYPES.WHITE).length, 0)
+
+    board.prepareGame();
+    assert.strictEqual(board.getPlacableSquares(consts.PIECE_TYPES.BLACK).length, 4)
+    assert.strictEqual(board.getPlacableSquares(consts.PIECE_TYPES.WHITE).length, 4)
   });
 });

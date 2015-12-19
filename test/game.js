@@ -91,4 +91,11 @@ describe('lib/game', () => {
       '> Put a "o" piece'
     ].join('\n'));
   });
+
+
+  describe('simulate games', () => {
+
+    it('testtest', () => {
+    });
+  });
 });

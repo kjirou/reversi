@@ -125,7 +125,7 @@ describe('lib/game', () => {
       isSuccess: true,
       isNextActorPassed: false,
     });
-    assert.strictEqual(game._isEnded, false);
+    assert.strictEqual(game.isEnded, false);
     assert.strictEqual(game.getHighScorer(), PIECE_TYPES.BLACK);
 
     report = game.proceed(3, 7);
@@ -150,7 +150,7 @@ describe('lib/game', () => {
       isSuccess: true,
       isNextActorPassed: false,
     });
-    assert.strictEqual(game._isEnded, true);
+    assert.strictEqual(game.isEnded, true);
     assert.strictEqual(game.getHighScorer(), PIECE_TYPES.WHITE);
   });
 

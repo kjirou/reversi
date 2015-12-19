@@ -156,6 +156,7 @@ describe('lib/game', () => {
 
 
   describe('simulate games', () => {
+    // TODO: Currently, this is running manually
     return;
 
     const getNextSquare = (game) => {
@@ -166,7 +167,7 @@ describe('lib/game', () => {
       return lodash.sample(squares);
     };
 
-    it('run 100 games', () => {
+    it('run games', () => {
       const gameResults = {
       };
 

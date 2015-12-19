@@ -34,6 +34,7 @@
     "minimist-subcommand": "1.0.0"
   },
   "devDependencies": {
+    "lodash": "3.10.1",
     "mocha": "2.3.4"
   }
 }

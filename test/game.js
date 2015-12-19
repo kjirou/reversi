@@ -1,7 +1,10 @@
 'use strict';
 
 const assert = require('assert');
+const lodash = require('lodash');
 
+const consts = require('../lib/consts');
+const PIECE_TYPES = consts.PIECE_TYPES;
 const Game = require('../lib/game').Game;
 
 
@@ -24,78 +27,145 @@ describe('lib/game', () => {
       '6--------',
       '7--------',
       'x: 2, o: 2',
-      '> Put a "x" piece'
+      '> Place a "x" piece'
     ].join('\n'));
   });
 
-  it('proceed', () => {
+  it('should change status by proceeding', () => {
     const game = new Game();
+    assert.strictEqual(game.getHighScorer(), null);
 
-    assert.strictEqual(game.proceed(3, 2).isSuccess, true);
+    game._board._putPiece(3, 4, PIECE_TYPES.BLANK);
+    game._board._putPiece(4, 3, PIECE_TYPES.BLANK);
+    game._board._putPiece(4, 4, PIECE_TYPES.BLANK);
+    game._board._putPiece(3, 1, PIECE_TYPES.WHITE);
+    game._board._putPiece(3, 2, PIECE_TYPES.BLACK);
+    game._board._putPiece(3, 3, PIECE_TYPES.WHITE);
+    game._board._putPiece(3, 5, PIECE_TYPES.WHITE);
+    assert.strictEqual(game._board.toText(), [
+      '--------',
+      '--------',
+      '--------',
+      '-oxo-o--',
+      '--------',
+      '--------',
+      '--------',
+      '--------',
+    ].join('\n'));
+
+    let report;
+    report = game.proceed(0, 0);
+    assert.strictEqual(game._board.toText(), [
+      '--------',
+      '--------',
+      '--------',
+      '-oxo-o--',
+      '--------',
+      '--------',
+      '--------',
+      '--------',
+    ].join('\n'));
+    assert.deepEqual(report, {
+      pieceType: PIECE_TYPES.BLACK,
+      rivalPieceType: PIECE_TYPES.WHITE,
+      rowIndex: 0,
+      colIndex: 0,
+      isSuccess: false,
+      isNextActorPassed: false,
+    });
+
+    report = game.proceed(3, 4);
+    assert.strictEqual(game._board.toText(), [
+      '--------',
+      '--------',
+      '--------',
+      '-oxxxo--',
+      '--------',
+      '--------',
+      '--------',
+      '--------',
+    ].join('\n'));
+    assert.deepEqual(report, {
+      pieceType: PIECE_TYPES.BLACK,
+      rivalPieceType: PIECE_TYPES.WHITE,
+      rowIndex: 3,
+      colIndex: 4,
+      isSuccess: true,
+      isNextActorPassed: true,
+    });
+
+    report = game.proceed(3, 6);
+    assert.strictEqual(game._board.toText(), [
+      '--------',
+      '--------',
+      '--------',
+      '-oxxxxx-',
+      '--------',
+      '--------',
+      '--------',
+      '--------',
+    ].join('\n'));
+    assert.deepEqual(report, {
+      pieceType: PIECE_TYPES.BLACK,
+      rivalPieceType: PIECE_TYPES.WHITE,
+      rowIndex: 3,
+      colIndex: 6,
+      isSuccess: true,
+      isNextActorPassed: false,
+    });
+    assert.strictEqual(game._isEnded, false);
+    assert.strictEqual(game.getHighScorer(), PIECE_TYPES.BLACK);
+
+    report = game.proceed(3, 7);
     assert.strictEqual(game.toText(), [
       ' 01234567',
       '0--------',
       '1--------',
       '2--------',
-      '3--xxx---',
-      '4---xo---',
+      '3-ooooooo',
+      '4--------',
       '5--------',
       '6--------',
       '7--------',
-      'x: 4, o: 1',
-      '> Put a "o" piece'
+      'x: 0, o: 7',
+      '> "o" won!'
     ].join('\n'));
-
-    assert.strictEqual(game.proceed(2, 4).isSuccess, true);
-    assert.strictEqual(game.toText(), [
-      ' 01234567',
-      '0--------',
-      '1--------',
-      '2----o---',
-      '3--xxo---',
-      '4---xo---',
-      '5--------',
-      '6--------',
-      '7--------',
-      'x: 3, o: 3',
-      '> Put a "x" piece'
-    ].join('\n'));
-
-    assert.strictEqual(game.proceed(5, 5).isSuccess, true);
-    assert.strictEqual(game.toText(), [
-      ' 01234567',
-      '0--------',
-      '1--------',
-      '2----o---',
-      '3--xxo---',
-      '4---xx---',
-      '5-----x--',
-      '6--------',
-      '7--------',
-      'x: 5, o: 2',
-      '> Put a "o" piece'
-    ].join('\n'));
-
-    assert.strictEqual(game.proceed(1, 4).isSuccess, false);
-    assert.strictEqual(game.toText(), [
-      ' 01234567',
-      '0--------',
-      '1--------',
-      '2----o---',
-      '3--xxo---',
-      '4---xx---',
-      '5-----x--',
-      '6--------',
-      '7--------',
-      'x: 5, o: 2',
-      '> Put a "o" piece'
-    ].join('\n'));
+    assert.deepEqual(report, {
+      pieceType: PIECE_TYPES.WHITE,
+      rivalPieceType: PIECE_TYPES.BLACK,
+      rowIndex: 3,
+      colIndex: 7,
+      isSuccess: true,
+      isNextActorPassed: false,
+    });
+    assert.strictEqual(game._isEnded, true);
+    assert.strictEqual(game.getHighScorer(), PIECE_TYPES.WHITE);
   });
 
 
   describe('simulate games', () => {
+    return;
 
-    it('testtest', () => {
+    const getNextSquare = (game) => {
+      const squares = game._board.getPlacableSquares(game._nextPieceType);
+      if (squares.length === 0) {
+        return null;
+      }
+      return lodash.sample(squares);
+    };
+
+    it('run 100 games', () => {
+      const gameResults = {
+      };
+
+      Array.from({ length: 1 }).forEach(() => {
+        const game = new Game();
+        let nextSquare;
+        while (nextSquare = getNextSquare(game)) {
+          game.proceed(nextSquare.rowIndex, nextSquare.colIndex);
+          console.log(game.toText());
+        }
+      });
     });
   });
 });

@@ -5,6 +5,8 @@
 
 Core logics for [Reversi](https://en.wikipedia.org/wiki/Reversi)
 
+![](https://raw.githubusercontent.com/kjirou/reversi/master/doc/demo.gif)
+
 
 ## Playtest
 
@@ -57,8 +59,6 @@ x: 4, o: 1
 > Place a "o" piece
 (x,y):
 ```
-
-![](https://raw.githubusercontent.com/kjirou/reversi/master/doc/demo.gif)
 
 
 ## Use in Node.js

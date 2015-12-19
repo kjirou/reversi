@@ -18,9 +18,9 @@ describe('lib/board', function() {
     assert.strictEqual(board._squares[0].length, 8);
   });
 
-  it('initializeGame', function() {
+  it('prepareGame', function() {
     var board = new Board();
-    board.initializeGame();
+    board.prepareGame();
     assert.strictEqual(board.toText(), [
       '--------',
       '--------',
@@ -35,7 +35,7 @@ describe('lib/board', function() {
 
   it('_tryToReverseTowardOneDirection, tryToReverse, putPieceToReverse', function() {
     var board = new Board();
-    board.initializeGame();
+    board.prepareGame();
     board._putPiece(3, 2, Board.PIECE_TYPES.WHITE);
     board._putPiece(4, 0, Board.PIECE_TYPES.WHITE);
     board._putPiece(4, 1, Board.PIECE_TYPES.BLACK);

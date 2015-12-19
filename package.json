@@ -25,6 +25,16 @@
     "node": ">=4.2",
     "npm": ">=2.14"
   },
+  "files": [
+    "README.md",
+    "bin",
+    "doc",
+    "examples",
+    "index.js",
+    "lib",
+    "package.json",
+    "test"
+  ],
   "bin": {
     "reversi": "./bin/reversi"
   },

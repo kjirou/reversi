@@ -162,4 +162,14 @@ describe('lib/board', () => {
     assert.strictEqual(board.getPlacableSquares(consts.PIECE_TYPES.BLACK).length, 4)
     assert.strictEqual(board.getPlacableSquares(consts.PIECE_TYPES.WHITE).length, 4)
   });
+
+  it('can create different size board', () => {
+    const board = new Board({ rowCount: 4, colCount: 6 });
+    assert.strictEqual(board.toText(), [
+      '------',
+      '------',
+      '------',
+      '------',
+    ].join('\n'));
+  });
 });

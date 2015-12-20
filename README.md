@@ -69,7 +69,9 @@ x: 4, o: 1
 npm install --save reversi
 ```
 
-### Example
+### Examples
+
+More examples can be found in [here](examples).
 
 ```js
 var reversi = require('reversi');

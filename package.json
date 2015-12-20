@@ -41,7 +41,9 @@
   "dependencies": {
     "keypress": "0.2.1",
     "lodash.countby": "3.1.1",
-    "lodash.flatten": "3.0.2"
+    "lodash.flatten": "3.0.2",
+    "lodash.uniq": "3.2.2",
+    "lodash.values": "3.0.0"
   },
   "devDependencies": {
     "lodash": "3.10.1",

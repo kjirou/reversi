@@ -5,15 +5,38 @@ const assert = require('assert');
 const consts = require('../lib/consts');
 const PIECE_TYPES = consts.PIECE_TYPES;
 const Board = require('../lib/board').Board;
+const Square = require('../lib/square').Square;
 
 
 describe('lib/board', () => {
 
   it('_createSquares', () => {
-    const squares = Board.prototype._createSquares(2, 3);
+    const squares = Board._createSquares(2, 3);
     assert.strictEqual(squares.length, 2);
     assert.strictEqual(squares[0].length, 3);
     assert.strictEqual(typeof squares[0][0], 'object');
+  })
+
+  it('_createSquaresFromMapText', () => {
+    let squares;
+
+    squares = Board._createSquaresFromMapText('-xo');
+    assert.strictEqual(squares.length, 1)
+    assert.strictEqual(squares[0].length, 3)
+    assert(squares[0][0] instanceof Square);
+    assert.strictEqual(squares[0][0].pieceType, PIECE_TYPES.BLANK)
+    assert.strictEqual(squares[0][1].pieceType, PIECE_TYPES.BLACK)
+    assert.strictEqual(squares[0][2].pieceType, PIECE_TYPES.WHITE)
+
+    squares = Board._createSquaresFromMapText([
+      '---',
+      '---',
+    ].join('\n'));
+    assert.strictEqual(squares.length, 2)
+
+    assert.throws(() => {
+      Board._createSquaresFromMapText('--\n---');
+    }, /rect/);
   })
 
   it('constructor', () => {
@@ -170,6 +193,14 @@ describe('lib/board', () => {
       '------',
       '------',
       '------',
+    ].join('\n'));
+  });
+
+  it('can create a board from map-text', () => {
+    const board = new Board({ mapText: 'ox-\nxo-' });
+    assert.strictEqual(board.toText(), [
+      'ox-',
+      'xo-',
     ].join('\n'));
   });
 });

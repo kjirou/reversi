@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/reversi.svg)](http://badge.fury.io/js/reversi)
 [![Build Status](https://travis-ci.org/kjirou/reversi.svg?branch=master)](https://travis-ci.org/kjirou/reversi)
 
-Core logics for [Reversi](https://en.wikipedia.org/wiki/Reversi)
+Core logics for the [Reversi](https://en.wikipedia.org/wiki/Reversi)
 
 ![](https://raw.githubusercontent.com/kjirou/reversi/master/doc/demo.gif)
 

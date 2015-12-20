@@ -5,6 +5,7 @@ const lodash = require('lodash');
 
 const consts = require('../lib/consts');
 const PIECE_TYPES = consts.PIECE_TYPES;
+const PRESET_RULE_TYPES = consts.PIECE_TYPES;
 const Game = require('../lib/game').Game;
 
 
@@ -152,6 +153,19 @@ describe('lib/game', () => {
     });
     assert.strictEqual(game.isEnded, true);
     assert.strictEqual(game.getHighScorer(), PIECE_TYPES.WHITE);
+  });
+
+  it('should create a game of different rule', () => {
+    const game = new Game({
+      presetRuleType: PRESET_RULE_TYPES.NOT_USE,
+      mapText: [
+        '---',
+        '---',
+      ].join('\n'),
+    });
+
+    assert.strictEqual(game.board.squares.length, 2);
+    assert.strictEqual(game.board.squares[0].length, 3);
   });
 
 

@@ -10,6 +10,18 @@ const Square = require('../lib/square').Square;
 
 describe('lib/board', () => {
 
+  const STANDARD_MAP_TEXT = [
+    '--------',
+    '--------',
+    '--------',
+    '---ox---',
+    '---xo---',
+    '--------',
+    '--------',
+    '--------',
+  ].join('\n');
+
+
   it('_createSquares', () => {
     const squares = Board._createSquares(2, 3);
     assert.strictEqual(squares.length, 2);
@@ -78,8 +90,7 @@ describe('lib/board', () => {
   });
 
   it('prepareGame', () => {
-    const board = new Board();
-    board.prepareGame();
+    const board = new Board({ mapText: STANDARD_MAP_TEXT });
     assert.strictEqual(board.toText(), [
       '--------',
       '--------',
@@ -93,8 +104,7 @@ describe('lib/board', () => {
   });
 
   it('_tryToReverseTowardOneDirection, tryToReverse, placePiece', () => {
-    const board = new Board();
-    board.prepareGame();
+    const board = new Board({ mapText: STANDARD_MAP_TEXT });
     board._putPiece(3, 2, consts.PIECE_TYPES.WHITE);
     board._putPiece(4, 0, consts.PIECE_TYPES.WHITE);
     board._putPiece(4, 1, consts.PIECE_TYPES.BLACK);
@@ -160,8 +170,7 @@ describe('lib/board', () => {
   });
 
   it('countByPieceType', () => {
-    const board = new Board();
-    board.prepareGame();
+    const board = new Board({ mapText: STANDARD_MAP_TEXT });
     assert.deepEqual(board.countByPieceType(), {
       BLACK: 2,
       BLANK: 60,
@@ -177,11 +186,13 @@ describe('lib/board', () => {
   });
 
   it('getPlacableSquares', () => {
-    const board = new Board();
+    let board;
+
+    board = new Board();
     assert.strictEqual(board.getPlacableSquares(consts.PIECE_TYPES.BLACK).length, 0)
     assert.strictEqual(board.getPlacableSquares(consts.PIECE_TYPES.WHITE).length, 0)
 
-    board.prepareGame();
+    board = new Board({ mapText: STANDARD_MAP_TEXT });
     assert.strictEqual(board.getPlacableSquares(consts.PIECE_TYPES.BLACK).length, 4)
     assert.strictEqual(board.getPlacableSquares(consts.PIECE_TYPES.WHITE).length, 4)
   });

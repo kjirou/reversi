@@ -145,7 +145,8 @@ describe('lib/board', () => {
       [4, 1]
     ]);
 
-    board.placePiece(3, 1, consts.PIECE_TYPES.BLACK);
+    const squareIndexes = board.placePiece(3, 1, consts.PIECE_TYPES.BLACK);
+    assert.strictEqual(squareIndexes.length, 2);
     assert.strictEqual(board.toText(), [
       '--------',
       '--------',

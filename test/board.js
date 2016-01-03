@@ -186,16 +186,16 @@ describe('lib/board', () => {
     });
   });
 
-  it('getPlacableSquares', () => {
+  it('getPlaceableSquares', () => {
     let board;
 
     board = new Board();
-    assert.strictEqual(board.getPlacableSquares(consts.PIECE_TYPES.BLACK).length, 0)
-    assert.strictEqual(board.getPlacableSquares(consts.PIECE_TYPES.WHITE).length, 0)
+    assert.strictEqual(board.getPlaceableSquares(consts.PIECE_TYPES.BLACK).length, 0)
+    assert.strictEqual(board.getPlaceableSquares(consts.PIECE_TYPES.WHITE).length, 0)
 
     board = new Board({ mapText: STANDARD_MAP_TEXT });
-    assert.strictEqual(board.getPlacableSquares(consts.PIECE_TYPES.BLACK).length, 4)
-    assert.strictEqual(board.getPlacableSquares(consts.PIECE_TYPES.WHITE).length, 4)
+    assert.strictEqual(board.getPlaceableSquares(consts.PIECE_TYPES.BLACK).length, 4)
+    assert.strictEqual(board.getPlaceableSquares(consts.PIECE_TYPES.WHITE).length, 4)
   });
 
   it('can create different size board', () => {

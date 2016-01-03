@@ -78,10 +78,10 @@ var squares = board.squares;  // -> squares[rowIndex][colIndex]
 //
 // Chack placable squares
 //
-board.isPlacableSquare(0, 0, PIECE_TYPES.WHITE);  // -> false
-board.isPlacableSquare(4, 5, PIECE_TYPES.WHITE);  // -> true
-board.getPlacableSquares(PIECE_TYPES.WHITE);      // -> 3 squares
-board.hasPlacableSquare(PIECE_TYPES.WHITE);       // -> true
+board.isPlaceableSquare(0, 0, PIECE_TYPES.WHITE);  // -> false
+board.isPlaceableSquare(4, 5, PIECE_TYPES.WHITE);  // -> true
+board.getPlaceableSquares(PIECE_TYPES.WHITE);      // -> 3 squares
+board.hasPlacableSquare(PIECE_TYPES.WHITE);        // -> true
 
 
 //

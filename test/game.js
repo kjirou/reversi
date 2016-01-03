@@ -174,7 +174,7 @@ describe('lib/game', () => {
     return;
 
     const getNextSquare = (game) => {
-      const squares = game._board.getPlacableSquares(game._nextPieceType);
+      const squares = game._board.getPlaceableSquares(game._nextPieceType);
       if (squares.length === 0) {
         return null;
       }

@@ -137,12 +137,30 @@ describe('lib/board', () => {
     assert.deepEqual(board._tryToReverseTowardOneDirection(4, 2, consts.PIECE_TYPES.BLACK, [0, 1]), []);
 
     assert.deepEqual(board.tryToReverse(3, 1, consts.PIECE_TYPES.BLACK), [
-      [3, 2],
-      [3, 3]
+      [ [3, 2], [3, 3] ],
+      [
+        [],
+        [],
+        [ [3, 2], [3, 3] ],
+        [],
+        [],
+        [],
+        [],
+        [],
+      ]
     ]);
     assert.deepEqual(board.tryToReverse(4, 2, consts.PIECE_TYPES.WHITE), [
-      [4, 3],
-      [4, 1]
+      [ [4, 3], [4, 1] ],
+      [
+        [],
+        [],
+        [ [4, 3] ],
+        [],
+        [],
+        [],
+        [ [4, 1] ],
+        [],
+      ]
     ]);
 
     const squareIndexes = board.placePiece(3, 1, consts.PIECE_TYPES.BLACK);
